@@ -39,7 +39,7 @@ namespace Blog.Services.Concrete
                     Article = addarticle,
                     ResultStatus = ResultStatus.Success,
                     message = $"{article.Title} başlıklı makale başarıyla eklenmiştir."
-                }
+        }
                 , $"{article.Title} başlıklı makale başarıyla eklenmiştir.");
         }
 
@@ -171,7 +171,7 @@ namespace Blog.Services.Concrete
             if (result)
             {
                 var article = await _unitOfWork.Articles.GetAsync(a => a.Id == articleId);
-
+               
                 await _unitOfWork.Articles.DeleteAsync(article);
                 await _unitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, $"{article.Title} başlıklı makale başarıyla silindi.");
@@ -193,6 +193,8 @@ namespace Blog.Services.Concrete
                     message = $"{article.Title} başlıklı makale başarıyla güncellenmiştir."
                 },
                 $"{article.Title} başlıklı makale başarıyla güncellenmiştir.");
+
+
 
         }
     }
