@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Blog.Mvc
@@ -25,7 +27,11 @@ namespace Blog.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
            // services.AddRazorPages();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt=>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); //JsonNamingPolicy.CamelCase
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
             services.AddAutoMapper(typeof(Startup));
             services.LoadMyServices();
         }
